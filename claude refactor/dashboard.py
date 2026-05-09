@@ -233,13 +233,15 @@ def make_slider(filter_id: str) -> dcc.RangeSlider:
 
 
 def make_sidebar_filter_block(filter_id: str, component) -> list:
-    """Return [Label, Component] pair for a sidebar filter."""
+    """Return [Label, Component, (Br)?] for a sidebar filter.
+
+    Sliders get a trailing <Br> for visual breathing room; dropdowns don't.
+    """
     cfg = FILTER_CONFIG[filter_id]
     label = cfg.get("label", filter_id.replace("_", " ").title())
-    spacer = html.Br() if cfg["type"] == "range" else None
     items = [html.Label(label, className="sidebar-label"), component]
-    if spacer:
-        items.append(spacer)
+    if cfg["type"] == "range":
+        items.append(html.Br())
     return items
 
 # =============================================================================
