@@ -1,0 +1,365 @@
+/* =============================================================================
+   DESIGN TOKENS
+   ============================================================================= */
+
+:root {
+    /* Colours */
+    --color-bg:           #222222;
+    --color-bg-surface:   #1f1f1f;
+    --color-bg-sunken:    #2b2b2b;
+    --color-border:       #444444;
+    --color-text:         #ffffff;
+    --color-text-muted:   rgba(255, 255, 255, 0.85);
+    --color-accent:       #1890ff;
+    --color-risk-high:    #ff4d4f;
+    --color-risk-medium:  #faad14;
+    --color-risk-low:     #52c41a;
+    --color-risk-unknown: #8c8c8c;
+
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2rem;
+
+    /* Layout */
+    --sidebar-width:  300px;
+    --gutter-x:       var(--space-3);
+    --gutter-y:       0;
+
+    /* Typography */
+    --font-size-sm:   13px;
+    --font-size-base: 15px;
+    --font-size-md:   18px;
+
+    /* Borders */
+    --radius-sm:   6px;
+    --radius-md:   18px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    /* Scrollbar */
+    --scrollbar-size:  10px;
+    --scrollbar-thumb: #444444;
+    --scrollbar-track: #1e1e1e;
+}
+
+
+/* =============================================================================
+   RESET / BASE
+   ============================================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+
+/* =============================================================================
+   UTILITY CLASSES
+   ============================================================================= */
+
+.bg-dark   { background-color: var(--color-bg); }
+.text-white { color: var(--color-text); }
+.text-center { text-align: center; }
+.fw-bold  { font-weight: bold; }
+
+/* Gutters */
+.g-0  { --gutter-x: 0;              --gutter-y: 0; }
+.g-1  { --gutter-x: var(--space-1); --gutter-y: var(--space-1); }
+.g-2  { --gutter-x: var(--space-2); --gutter-y: var(--space-2); }
+.g-3  { --gutter-x: var(--space-3); --gutter-y: var(--space-3); }
+
+.gx-1 { --gutter-x: var(--space-1); }
+.gx-2 { --gutter-x: var(--space-2); }
+.gx-3 { --gutter-x: var(--space-3); }
+
+.gy-1 { --gutter-y: var(--space-1); }
+.gy-2 { --gutter-y: var(--space-2); }
+.gy-3 { --gutter-y: var(--space-3); }
+
+
+/* =============================================================================
+   GRID — ROW
+   ============================================================================= */
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top:   calc(-1 * var(--gutter-y));
+    margin-right: calc(-0.5 * var(--gutter-x));
+    margin-left:  calc(-0.5 * var(--gutter-x));
+}
+
+
+/* =============================================================================
+   GRID — COLUMNS
+   ============================================================================= */
+
+/* All column classes share the same base */
+[class*="col"] {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--gutter-x) * 0.5);
+    padding-left:  calc(var(--gutter-x) * 0.5);
+    margin-top: var(--gutter-y);
+}
+
+.col      { flex: 1 1 0; }
+.col-auto { flex: 0 0 auto; width: auto; }
+.col-2    { flex: 0 0 auto; width: 16.6667%; }
+
+/* Responsive — small (≥ 576px) */
+@media (min-width: 576px) {
+    .col-sm-3  { flex: 0 0 auto; width: 25%; }
+    .col-sm-4  { flex: 0 0 auto; width: 33.3333%; }
+    .col-sm-6  { flex: 0 0 auto; width: 50%; }
+    .col-sm-8  { flex: 0 0 auto; width: 66.6667%; }
+    .col-sm-12 { flex: 0 0 auto; width: 100%; }
+}
+
+/* Responsive — medium (≥ 768px) */
+@media (min-width: 768px) {
+    .col-md-3  { flex: 0 0 auto; width: 25%; }
+    .col-md-4  { flex: 0 0 auto; width: 33.3333%; }
+    .col-md-6  { flex: 0 0 auto; width: 50%; }
+    .col-md-8  { flex: 0 0 auto; width: 66.6667%; }
+    .col-md-12 { flex: 0 0 auto; width: 100%; }
+}
+
+/* Responsive — large (≥ 1200px) */
+@media (min-width: 1200px) {
+    .col-lg-3  { flex: 0 0 auto; width: 25%; }
+    .col-lg-4  { flex: 0 0 auto; width: 33.3333%; }
+    .col-lg-6  { flex: 0 0 auto; width: 50%; }
+    .col-lg-8  { flex: 0 0 auto; width: 66.6667%; }
+    .col-lg-12 { flex: 0 0 auto; width: 100%; }
+}
+
+
+/* =============================================================================
+   LAYOUT — SIDEBAR
+   ============================================================================= */
+
+.sidebar {
+    width: var(--sidebar-width);
+    flex: 0 0 var(--sidebar-width);
+    padding: var(--space-4);
+    border-right: 1px solid var(--color-border);
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-md);
+}
+
+.sidebar-label {
+    display: block;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-1);
+    font-size: var(--font-size-base);
+    opacity: 0.9;
+}
+
+
+/* =============================================================================
+   LAYOUT — MAIN CONTENT
+   ============================================================================= */
+
+.main-content {
+    height: 100vh;
+    overflow-y: auto;
+    padding: var(--space-3);
+}
+
+.chart-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =============================================================================
+   COMPONENTS — RISK TABLE CARDS
+   ============================================================================= */
+
+.risk-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-bg-surface);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-card);
+    color: var(--color-text);
+    gap: var(--space-3);
+}
+
+/* ID bubble */
+.risk-card__id-bubble {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-accent);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+/* Centre body */
+.risk-card__body {
+    flex: 1;
+    padding: 0 var(--space-4);
+    min-width: 0; /* allow text truncation */
+}
+
+.risk-card__top-row,
+.risk-card__bottom-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.risk-card__top-row {
+    margin-bottom: 8px;
+    justify-content: space-between;
+}
+
+.risk-card__name {
+    font-weight: bold;
+    font-size: var(--font-size-md);
+    flex: 2;
+}
+
+.risk-card__phone {
+    font-size: var(--font-size-base);
+    opacity: 0.9;
+    flex: 1;
+    text-align: right;
+}
+
+.risk-card__address {
+    flex: 2;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.risk-card__coord {
+    flex: 1;
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+
+.risk-card__coord--right {
+    text-align: right;
+}
+
+/* Risk badge */
+.risk-card__risk-badge {
+    flex-shrink: 0;
+    min-width: 100px;
+    height: 70px;
+    border-radius: 35px;
+    background-color: var(--color-bg-sunken);
+    border: 2px solid;           /* colour set inline via Python */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+}
+
+.risk-card__risk-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-full);
+    margin-bottom: 8px;
+    /* background-color set inline via Python */
+}
+
+.risk-card__risk-label {
+    font-weight: bold;
+    font-size: var(--font-size-base);
+}
+
+
+/* =============================================================================
+   COMPONENTS — PAGINATION CONTROLS
+   ============================================================================= */
+
+.pagination-controls {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-3);
+}
+
+
+/* =============================================================================
+   DASH OVERRIDES
+   ============================================================================= */
+
+/* Slider mark labels */
+.dash-slider-mark {
+    color: var(--color-text);
+}
+
+/* Dropdown selected value */
+.dash-dropdown-value {
+    color: #000000;
+}
+
+/* Slider tooltip */
+.rc-slider-tooltip .rc-slider-tooltip-inner {
+    background-color: var(--color-risk-high) !important;
+}
+
+
+/* =============================================================================
+   SCROLLBAR
+   ============================================================================= */
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width:  var(--scrollbar-size);
+    height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+}

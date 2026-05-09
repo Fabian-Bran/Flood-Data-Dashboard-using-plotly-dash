@@ -1,0 +1,188 @@
+k lets make a custom table component in dash python. it needs to use a pandas data frame and the layout is ID in a bubble on the left ,FullName,Phone, on a row, then on a row bellow Address,Lat,Lng, and the riskrating in a bubble on the right with a coloured circle that reacts to the risk rating
+
+->
+
+def create_risk_table(data: list[dict]):
+    """
+    Creates a custom table-style component from a list of dictionaries.
+
+    Expected dictionary keys:
+    - ID
+    - FullName
+    - Phone
+    - Address
+    - Lat
+    - Lng
+    - RiskLevel
+    """
+
+    def get_risk_color(risk):
+        """Return color based on risk rating."""
+
+        risk = str(risk).lower()
+
+        if risk in ["high", "critical"]:
+            return "#ff4d4f"
+
+        elif risk in ["medium", "moderate"]:
+            return "#faad14"
+
+        elif risk in ["low", "safe"]:
+            return "#52c41a"
+
+        return "#8c8c8c"
+
+    rows = []
+
+    # Convert list of dictionaries into iterable rows
+    if not data:
+        return html.Div("No data available")
+
+    for row in data:
+
+        risk_color = get_risk_color(row["RiskLevel"])
+
+        card = html.Div(
+            [
+                # =============================
+                # LEFT ID BUBBLE
+                # =============================
+                html.Div(
+                    str(row["ID"]),
+                    style={
+                        "minWidth": "60px",
+                        "height": "60px",
+                        "borderRadius": "50%",
+                        "backgroundColor": "#1890ff",
+                        "display": "flex",
+                        "alignItems": "center",
+                        "justifyContent": "center",
+                        "fontWeight": "bold",
+                        "fontSize": "18px",
+                        "color": "white",
+                    },
+                ),
+
+                # =============================
+                # CENTER CONTENT
+                # =============================
+                html.Div(
+                    [
+                        # TOP ROW
+                        html.Div(
+                            [
+                                html.Div(
+                                    row["FullName"],
+                                    style={
+                                        "fontWeight": "bold",
+                                        "fontSize": "18px",
+                                        "flex": "2",
+                                    },
+                                ),
+                                html.Div(
+                                    row["Phone"],
+                                    style={
+                                        "fontSize": "15px",
+                                        "opacity": "0.9",
+                                        "flex": "1",
+                                        "textAlign": "right",
+                                    },
+                                ),
+                            ],
+                            style={
+                                "display": "flex",
+                                "justifyContent": "spaceBetween",
+                                "alignItems": "center",
+                                "marginBottom": "8px",
+                            },
+                        ),
+
+                        # BOTTOM ROW
+                        html.Div(
+                            [
+                                html.Div(
+                                    row["Address"],
+                                    style={
+                                        "flex": "2",
+                                        "fontSize": "14px",
+                                        "opacity": "0.85",
+                                    },
+                                ),
+                                html.Div(
+                                    f"Lat: {row['Lat']}",
+                                    style={
+                                        "flex": "1",
+                                        "fontSize": "13px",
+                                        "textAlign": "center",
+                                    },
+                                ),
+                                html.Div(
+                                    f"Lng: {row['Lng']}",
+                                    style={
+                                        "flex": "1",
+                                        "fontSize": "13px",
+                                        "textAlign": "right",
+                                    },
+                                ),
+                            ],
+                            style={
+                                "display": "flex",
+                                "alignItems": "center",
+                                "gap": "10px",
+                            },
+                        ),
+                    ],
+                    style={
+                        "flex": "1",
+                        "padding": "0 20px",
+                    },
+                ),
+
+                # =============================
+                # RIGHT RISK BUBBLE
+                # =============================
+                html.Div(
+                    [
+                        html.Div(
+                            style={
+                                "width": "16px",
+                                "height": "16px",
+                                "borderRadius": "50%",
+                                "backgroundColor": risk_color,
+                                "marginBottom": "8px",
+                            }
+                        ),
+                        html.Div(
+                            str(row["RiskLevel"]),
+                            style={
+                                "fontWeight": "bold",
+                                "fontSize": "15px",
+                            },
+                        ),
+                    ],
+                    style={
+                        "minWidth": "100px",
+                        "height": "70px",
+                        "borderRadius": "35px",
+                        "backgroundColor": "#2b2b2b",
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "alignItems": "center",
+                        "justifyContent": "center",
+                        "border": f"2px solid {risk_color}",
+                        "color": "white",
+                    },
+                ),
+            ],
+            style={
+                "display": "flex",
+                "alignItems": "center",
+                "justifyContent": "spaceBetween",
+                "backgroundColor": "#1f1f1f",
+                "padding": "18px",
+                "borderRadius": "18px",
+                "marginBottom": "14px",
+                "boxShadow": "0 2px 8px rgba(0,0,0,0.3)",
+                "color": "white",
+            },
+        )

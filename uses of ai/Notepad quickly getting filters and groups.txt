@@ -1,0 +1,301 @@
+for the following ID,FullName,Phone,Address,Lat,Lng,Elevation_m,DistanceToRiver_m,Age,HouseholdSize,Pets,PrimaryLanguage,BuildingType,YearBuilt,InsuranceStatus,RiskLevel,MedicalConditions,MobilityAssistance,PowerStatus,GasShutoff,WaterDepth_cm,WaterRisingRate_cm_hr,StructuralDamage_Pct,EvacuationZone,RouteToShelterClear,CurrentStatus,CurrentLocation,LastContact,EmergencyContact,Notes sort them into filters and groups for a pie chart, for example "household size" can be a group for a pie chart while water depth/rising rate can be used as a filter.
+
+ceate the variables needed in the format "continents = flood_data_df.Continent.unique() years = flood_data_df.Year.unique() cont_population = dcc.Dropdown(id="cont_pop", options=continents, value="Asia",clearable=False) year_population = dcc.Dropdown(id="year_pop", options=years, value=1952,clearable=False)"
+
+->
+
+# =========================
+# UNIQUE VALUES / FILTERS
+# =========================
+
+risk_levels = flood_data_df.RiskLevel.unique()
+insurance_statuses = flood_data_df.InsuranceStatus.unique()
+building_types = flood_data_df.BuildingType.unique()
+languages = flood_data_df.PrimaryLanguage.unique()
+power_statuses = flood_data_df.PowerStatus.unique()
+gas_shutoff_statuses = flood_data_df.GasShutoff.unique()
+evacuation_zones = flood_data_df.EvacuationZone.unique()
+current_statuses = flood_data_df.CurrentStatus.unique()
+mobility_assistance_options = flood_data_df.MobilityAssistance.unique()
+route_clear_options = flood_data_df.RouteToShelterClear.unique()
+
+# Optional grouped numeric categories
+household_sizes = flood_data_df.HouseholdSize.unique()
+ages = flood_data_df.Age.unique()
+years_built = flood_data_df.YearBuilt.unique()
+
+
+# =========================
+# DROPDOWNS
+# =========================
+
+risklevel_dropdown = dcc.Dropdown(
+    id="risklevel_filter",
+    options=risk_levels,
+    value=risk_levels[0],
+    clearable=False
+)
+
+insurance_dropdown = dcc.Dropdown(
+    id="insurance_filter",
+    options=insurance_statuses,
+    value=insurance_statuses[0],
+    clearable=False
+)
+
+buildingtype_dropdown = dcc.Dropdown(
+    id="buildingtype_filter",
+    options=building_types,
+    value=building_types[0],
+    clearable=False
+)
+
+language_dropdown = dcc.Dropdown(
+    id="language_filter",
+    options=languages,
+    value=languages[0],
+    clearable=False
+)
+
+powerstatus_dropdown = dcc.Dropdown(
+    id="powerstatus_filter",
+    options=power_statuses,
+    value=power_statuses[0],
+    clearable=False
+)
+
+gasshutoff_dropdown = dcc.Dropdown(
+    id="gasshutoff_filter",
+    options=gas_shutoff_statuses,
+    value=gas_shutoff_statuses[0],
+    clearable=False
+)
+
+evacuationzone_dropdown = dcc.Dropdown(
+    id="evacuationzone_filter",
+    options=evacuation_zones,
+    value=evacuation_zones[0],
+    clearable=False
+)
+
+currentstatus_dropdown = dcc.Dropdown(
+    id="currentstatus_filter",
+    options=current_statuses,
+    value=current_statuses[0],
+    clearable=False
+)
+
+mobility_dropdown = dcc.Dropdown(
+    id="mobility_filter",
+    options=mobility_assistance_options,
+    value=mobility_assistance_options[0],
+    clearable=False
+)
+
+routeclear_dropdown = dcc.Dropdown(
+    id="routeclear_filter",
+    options=route_clear_options,
+    value=route_clear_options[0],
+    clearable=False
+)
+
+householdsize_dropdown = dcc.Dropdown(
+    id="householdsize_filter",
+    options=household_sizes,
+    value=household_sizes[0],
+    clearable=False
+)
+
+yearbuilt_dropdown = dcc.Dropdown(
+    id="yearbuilt_filter",
+    options=years_built,
+    value=years_built[0],
+    clearable=False
+)
+
+some would be more sutible as sliders change it.
+from dash import dcc
+
+# =========================
+# UNIQUE VALUES / FILTERS
+# =========================
+
+risk_levels = sorted(flood_data_df.RiskLevel.dropna().unique())
+insurance_statuses = sorted(flood_data_df.InsuranceStatus.dropna().unique())
+building_types = sorted(flood_data_df.BuildingType.dropna().unique())
+languages = sorted(flood_data_df.PrimaryLanguage.dropna().unique())
+power_statuses = sorted(flood_data_df.PowerStatus.dropna().unique())
+gas_shutoff_statuses = sorted(flood_data_df.GasShutoff.dropna().unique())
+evacuation_zones = sorted(flood_data_df.EvacuationZone.dropna().unique())
+current_statuses = sorted(flood_data_df.CurrentStatus.dropna().unique())
+mobility_assistance_options = sorted(flood_data_df.MobilityAssistance.dropna().unique())
+route_clear_options = sorted(flood_data_df.RouteToShelterClear.dropna().unique())
+
+# Numeric ranges (better for sliders)
+age_min = int(flood_data_df.Age.min())
+age_max = int(flood_data_df.Age.max())
+
+household_min = int(flood_data_df.HouseholdSize.min())
+household_max = int(flood_data_df.HouseholdSize.max())
+
+yearbuilt_min = int(flood_data_df.YearBuilt.min())
+yearbuilt_max = int(flood_data_df.YearBuilt.max())
+
+waterdepth_min = int(flood_data_df.WaterDepth_cm.min())
+waterdepth_max = int(flood_data_df.WaterDepth_cm.max())
+
+waterrise_min = int(flood_data_df.WaterRisingRate_cm_hr.min())
+waterrise_max = int(flood_data_df.WaterRisingRate_cm_hr.max())
+
+damage_min = int(flood_data_df.StructuralDamage_Pct.min())
+damage_max = int(flood_data_df.StructuralDamage_Pct.max())
+
+elevation_min = int(flood_data_df.Elevation_m.min())
+elevation_max = int(flood_data_df.Elevation_m.max())
+
+riverdistance_min = int(flood_data_df.DistanceToRiver_m.min())
+riverdistance_max = int(flood_data_df.DistanceToRiver_m.max())
+
+
+# =========================
+# DROPDOWNS
+# =========================
+
+risklevel_dropdown = dcc.Dropdown(
+    id="risklevel_filter",
+    options=risk_levels,
+    value=risk_levels[0],
+    clearable=False
+)
+
+insurance_dropdown = dcc.Dropdown(
+    id="insurance_filter",
+    options=insurance_statuses,
+    value=insurance_statuses[0],
+    clearable=False
+)
+
+buildingtype_dropdown = dcc.Dropdown(
+    id="buildingtype_filter",
+    options=building_types,
+    value=building_types[0],
+    clearable=False
+)
+
+language_dropdown = dcc.Dropdown(
+    id="language_filter",
+    options=languages,
+    value=languages[0],
+    clearable=False
+)
+
+powerstatus_dropdown = dcc.Dropdown(
+    id="powerstatus_filter",
+    options=power_statuses,
+    value=power_statuses[0],
+    clearable=False
+)
+
+gasshutoff_dropdown = dcc.Dropdown(
+    id="gasshutoff_filter",
+    options=gas_shutoff_statuses,
+    value=gas_shutoff_statuses[0],
+    clearable=False
+)
+
+evacuationzone_dropdown = dcc.Dropdown(
+    id="evacuationzone_filter",
+    options=evacuation_zones,
+    value=evacuation_zones[0],
+    clearable=False
+)
+
+currentstatus_dropdown = dcc.Dropdown(
+    id="currentstatus_filter",
+    options=current_statuses,
+    value=current_statuses[0],
+    clearable=False
+)
+
+mobility_dropdown = dcc.Dropdown(
+    id="mobility_filter",
+    options=mobility_assistance_options,
+    value=mobility_assistance_options[0],
+    clearable=False
+)
+
+routeclear_dropdown = dcc.Dropdown(
+    id="routeclear_filter",
+    options=route_clear_options,
+    value=route_clear_options[0],
+    clearable=False
+)
+
+
+# =========================
+# SLIDERS
+# =========================
+
+age_slider = dcc.RangeSlider(
+    id="age_slider",
+    min=age_min,
+    max=age_max,
+    value=[age_min, age_max],
+    tooltip={"placement": "bottom"}
+)
+
+household_slider = dcc.RangeSlider(
+    id="household_slider",
+    min=household_min,
+    max=household_max,
+    value=[household_min, household_max],
+    tooltip={"placement": "bottom"}
+)
+
+yearbuilt_slider = dcc.RangeSlider(
+    id="yearbuilt_slider",
+    min=yearbuilt_min,
+    max=yearbuilt_max,
+    value=[yearbuilt_min, yearbuilt_max],
+    tooltip={"placement": "bottom"}
+)
+
+waterdepth_slider = dcc.RangeSlider(
+    id="waterdepth_slider",
+    min=waterdepth_min,
+    max=waterdepth_max,
+    value=[waterdepth_min, waterdepth_max],
+    tooltip={"placement": "bottom"}
+)
+
+waterrise_slider = dcc.RangeSlider(
+    id="waterrise_slider",
+    min=waterrise_min,
+    max=waterrise_max,
+    value=[waterrise_min, waterrise_max],
+    tooltip={"placement": "bottom"}
+)
+
+damage_slider = dcc.RangeSlider(
+    id="damage_slider",
+    min=damage_min,
+    max=damage_max,
+    value=[damage_min, damage_max],
+    tooltip={"placement": "bottom"}
+)
+
+elevation_slider = dcc.RangeSlider(
+    id="elevation_slider",
+    min=elevation_min,
+    max=elevation_max,
+    value=[elevation_min, elevation_max],
+    tooltip={"placement": "bottom"}
+)
+
+riverdistance_slider = dcc.RangeSlider(
+    id="riverdistance_slider",
+    min=riverdistance_min,
+    max=riverdistance_max,
+    value=[riverdistance_min, riverdistance_max],
+    tooltip={"placement": "bottom"}
+)

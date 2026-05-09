@@ -1,0 +1,157 @@
+:root {
+    --gutter-x: 1rem;
+    --gutter-y: 0;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #222222;
+  }
+  
+  .bg-dark {
+    background: #222222;
+  }
+  
+  .dash-slider-mark {
+    color : #ffffff
+  }
+
+  .dash-dropdown-value {
+    color : #000000
+  }
+
+  .rc-slider-tooltip .rc-slider-tooltip-inner {
+    background-color: #ff4d4f !important;
+}
+  .text-white {
+    color: #ffffff;
+  }
+  /* =========================
+     ROW
+  ========================= */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--gutter-y));
+    margin-right: calc(-0.5 * var(--gutter-x));
+    margin-left: calc(-0.5 * var(--gutter-x));
+    justify-content: center;
+  }
+  
+  /* =========================
+     COLUMNS BASE
+  ========================= */
+  [class^="col"] {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--gutter-x) * 0.5);
+    padding-left: calc(var(--gutter-x) * 0.5);
+    margin-top: var(--gutter-y);
+    justify-content: center;
+  }
+  
+  /* Flexible column */
+  .col {
+    flex: 1 1 0;
+    justify-content: center;
+  }
+  
+  /* Auto column */
+  .col-auto {
+    flex: 0 0 auto;
+    width: auto;
+    justify-content: center;
+  }
+  
+  /* =========================
+     ROW HELPERS
+  ========================= */
+  .row-cols-2 > * {
+    flex: 0 0 auto;
+    width: 75%;
+  }
+  
+  .row-cols-3 > * {
+    flex: 0 0 auto;
+    width: 66.3333%;
+  }
+  
+  .row-cols-4 > * {
+    flex: 0 0 auto;
+    width: 66%;
+  }
+  
+  /* =========================
+     GUTTERS (SPACING)
+  ========================= */
+  .g-0 { --gutter-x: 0; --gutter-y: 0; }
+  .g-1 { --gutter-x: 0.25rem; --gutter-y: 0.25rem; }
+  .g-2 { --gutter-x: 0.5rem; --gutter-y: 0.5rem; }
+  .g-3 { --gutter-x: 1rem; --gutter-y: 1rem; }
+  
+  .gx-1 { --gutter-x: 0.25rem; }
+  .gx-2 { --gutter-x: 0.5rem; }
+  .gx-3 { --gutter-x: 1rem; }
+  
+  .gy-1 { --gutter-y: 0.25rem; }
+  .gy-2 { --gutter-y: 0.5rem; }
+  .gy-3 { --gutter-y: 1rem; }
+  
+  /* =========================
+     RESPONSIVE (SIMPLE)
+  ========================= */
+  /* Small screens */
+
+  @media (min-width: 300px) {
+    .col-sm-6 { width: 100%; height: 1000px; width: 1000px; }
+    .col-sm-4 { width: 100%; height: 100px; width: 100px; }
+    .col-sm-3 { width: 100%; height: 1000px; width: 1000px; }
+    .col-sm-8 { width: 100%; height: 1000px; width: 1000px; }
+    .col-sm-12 { width: 100%; height: 1000px; width: 1000px; }
+  }
+
+  /* Medium screens */
+  @media (min-width: 724px) {
+    .col-md-6 { width: 100%; height: 1000px; width: 1000px; }
+    .col-md-4 { width: 100%; height: 200px; width: 200px; }
+    .col-md-3 { width: 100%; height: 1000px; width: 1000px; }
+    .col-md-8 { width: 100%; height: 1000px; width: 1000px; }
+    .col-md-12 { width: 100%; height: 1000px; width: 1000px; }
+  }
+  
+  /* Large screens */
+  @media (min-width: 1600px) {
+    .col-lg-6 { width: 100%; height: 1000px; width: 1000pxpx; }
+    .col-lg-4 { width: 100%; height: 600px; width: 600px; }
+    .col-lg-3 {width: 100%; height: 1000pxpx; width: 1000pxpx; }
+    .col-lg-8 { width: 100%; height: 1000pxpx; width: 1000pxpx; }
+    .col-lg-12 {width: 100%; height: 1000pxpx; width: 1000pxpx; }
+  }
+
+/* ===== WebKit browsers (Chrome, Edge, Safari) ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e; /* dark track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;     /* thumb color */
+  border-radius: 6px;
+  border: 2px solid #1e1e1e; /* gives spacing effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* ===== Firefox ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #1e1e1e;
+}

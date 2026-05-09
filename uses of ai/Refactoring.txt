@@ -1,0 +1,14 @@
+1778359291973_dashboard.py
+py
+
+
+1778359297181_stylesheet.css
+157 lines
+
+css
+
+refactor these so they are clean and scalable
+
+->
+
+whats in the claude folder

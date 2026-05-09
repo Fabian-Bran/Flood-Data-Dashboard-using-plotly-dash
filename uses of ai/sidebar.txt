@@ -1,0 +1,93 @@
+risklevel_dropdow_side = dcc.Dropdown( id="risklevel_filter", options=risk_levels, value=risk_levels[0], clearable=False ) insurance_dropdown_side = dcc.Dropdown( id="insurance_filter", options=insurance_statuses, value=insurance_statuses[0], clearable=False ) buildingtype_dropdown_side = dcc.Dropdown( id="buildingtype_filter", options=building_types, value=building_types[0], clearable=False ) language_dropdown_side = dcc.Dropdown( id="language_filter", options=languages, value=languages[0], clearable=False ) powerstatus_dropdown_side = dcc.Dropdown( id="powerstatus_filter", options=power_statuses, value=power_statuses[0], clearable=False ) gasshutoff_dropdown_side = dcc.Dropdown( id="gasshutoff_filter", options=gas_shutoff_statuses, value=gas_shutoff_statuses[0], clearable=False ) evacuationzone_dropdown_side = dcc.Dropdown( id="evacuationzone_filter", options=evacuation_zones, value=evacuation_zones[0], clearable=False ) currentstatus_dropdown_side = dcc.Dropdown( id="currentstatus_filter", options=current_statuses, value=current_statuses[0], clearable=False ) mobility_dropdown_side = dcc.Dropdown( id="mobility_filter", options=mobility_assistance_options, value=mobility_assistance_options[0], clearable=False ) routeclear_dropdown_side = dcc.Dropdown( id="routeclear_filter", options=route_clear_options, value=route_clear_options[0], clearable=False ) # ========================= # SLIDERS # ========================= age_slider = dcc.RangeSlider( id="age_slider", min=age_min, max=age_max, value=[age_min, age_max], tooltip={"placement": "bottom"} ) household_slider = dcc.RangeSlider( id="household_slider", min=household_min, max=household_max, value=[household_min, household_max], tooltip={"placement": "bottom"} ) yearbuilt_slider = dcc.RangeSlider( id="yearbuilt_slider", min=yearbuilt_min, max=yearbuilt_max, value=[yearbuilt_min, yearbuilt_max], tooltip={"placement": "bottom"} ) waterdepth_slider = dcc.RangeSlider( id="waterdepth_slider", min=waterdepth_min, max=waterdepth_max, value=[waterdepth_min, waterdepth_max], tooltip={"placement": "bottom"} ) waterrise_slider = dcc.RangeSlider( id="waterrise_slider", min=waterrise_min, max=waterrise_max, value=[waterrise_min, waterrise_max], tooltip={"placement": "bottom"} ) damage_slider = dcc.RangeSlider( id="damage_slider", min=damage_min, max=damage_max, value=[damage_min, damage_max], tooltip={"placement": "bottom"} ) elevation_slider = dcc.RangeSlider( id="elevation_slider", min=elevation_min, max=elevation_max, value=[elevation_min, elevation_max], tooltip={"placement": "bottom"} ) riverdistance_slider = dcc.RangeSlider( id="riverdistance_slider", min=riverdistance_min, max=riverdistance_max, value=[riverdistance_min, riverdistance_max], tooltip={"placement": "bottom"} ) put these in a sidebar = html.Div([])
+
+->
+
+sidebar = html.Div(
+    [
+        html.H4("Filters", className="sidebar-title"),
+
+        # =========================
+        # DROPDOWNS
+        # =========================
+        html.Label("Risk Level"),
+        risklevel_dropdow_side,
+
+        html.Label("Insurance Status"),
+        insurance_dropdown_side,
+
+        html.Label("Building Type"),
+        buildingtype_dropdown_side,
+
+        html.Label("Language"),
+        language_dropdown_side,
+
+        html.Label("Power Status"),
+        powerstatus_dropdown_side,
+
+        html.Label("Gas Shutoff"),
+        gasshutoff_dropdown_side,
+
+        html.Label("Evacuation Zone"),
+        evacuationzone_dropdown_side,
+
+        html.Label("Current Status"),
+        currentstatus_dropdown_side,
+
+        html.Label("Mobility Assistance"),
+        mobility_dropdown_side,
+
+        html.Label("Route Clear"),
+        routeclear_dropdown_side,
+
+        html.Hr(),
+
+        # =========================
+        # SLIDERS
+        # =========================
+        html.Label("Age Range"),
+        age_slider,
+
+        html.Br(),
+
+        html.Label("Household Size"),
+        household_slider,
+
+        html.Br(),
+
+        html.Label("Year Built"),
+        yearbuilt_slider,
+
+        html.Br(),
+
+        html.Label("Water Depth"),
+        waterdepth_slider,
+
+        html.Br(),
+
+        html.Label("Water Rise"),
+        waterrise_slider,
+
+        html.Br(),
+
+        html.Label("Damage Level"),
+        damage_slider,
+
+        html.Br(),
+
+        html.Label("Elevation"),
+        elevation_slider,
+
+        html.Br(),
+
+        html.Label("River Distance"),
+        riverdistance_slider,
+    ],
+    style={
+        "width": "300px",
+        "padding": "20px",
+        "backgroundColor": "#f8f9fa",
+        "borderRight": "1px solid #ddd",
+        "height": "100vh",
+        "overflowY": "auto",
+    },
+)

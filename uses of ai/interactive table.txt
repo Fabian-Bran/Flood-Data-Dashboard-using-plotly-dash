@@ -1,0 +1,40 @@
+convert current code to dash_table
+
+def create_table():
+    table = dash_table.DataTable(
+        data=flood_data_df.to_dict('records'),
+        columns=[
+            {"name": col, "id": col}
+            for col in flood_data_df.columns
+        ],
+
+        # Sorting
+        sort_action="native",
+
+        # Optional extras
+        filter_action="native",
+        page_action="native",
+        page_size=20,
+
+        # Styling
+        style_table={
+            "height": "700px",
+            "overflowY": "auto",
+            "backgroundColor": "#e5ecf6"
+        },
+
+        style_header={
+            "backgroundColor": "#dbe4f0",
+            "fontWeight": "bold",
+            "textAlign": "left"
+        },
+
+        style_cell={
+            "textAlign": "left",
+            "padding": "8px",
+            "backgroundColor": "#e5ecf6",
+            "border": "1px solid #c9d2e3"
+        }
+    )
+
+    return table
