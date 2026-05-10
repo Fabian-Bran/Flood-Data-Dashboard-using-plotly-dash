@@ -329,8 +329,8 @@ body {
 }
 
 /* Slider tooltip */
-.rc-slider-tooltip .rc-slider-tooltip-inner {
-    background-color: var(--color-risk-high) !important;
+.dash-slider-tooltip * {
+    color: #000000 !important;
 }
 
 
@@ -362,4 +362,8 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #666666;
+}
+
+.js-plotly-plot text {
+    fill: white !important;
 }

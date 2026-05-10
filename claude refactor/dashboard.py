@@ -231,6 +231,7 @@ def make_slider(filter_id: str) -> dcc.RangeSlider:
         min=lo, max=hi,
         value=[lo, hi],
         tooltip={"placement": "bottom"},
+        
     )
 
 
@@ -278,7 +279,7 @@ main_content = html.Div(
         ),
         html.Br(),
         html.Div(
-            dcc.Graph(id="pie_chart", className="bg-dark col-md-6 col-lg-4 col-sm-4"),
+            dcc.Graph(id="pie_chart", className="bg-dark col-md-6 col-lg-8 col-sm-4"),
             className="chart-wrapper",
         ),
     ],
@@ -417,7 +418,7 @@ def compute_pagination_meta(filtered_data):
     Input("pagination_meta", "data"),
 )
 def update_page_numbers(current_page, max_page):
-    return make_page_number(current_page,max_page)
+    return make_page_number(current_page+1,max_page+1)
 
 # =============================================================================
 # ENTRY POINT
