@@ -212,6 +212,8 @@ def create_pie_chart(filtered_data: list[dict] | None, pie_group: str):
 # =============================================================================
 # COMPONENT BUILDERS
 # =============================================================================
+def make_page_number(current_page, max_page):
+    return html.Span(f"{current_page}/{max_page}")
 
 def make_dropdown(filter_id: str) -> dcc.Dropdown:
     """Build a sidebar dropdown for *filter_id* from DROPDOWN_FILTERS."""
@@ -283,11 +285,17 @@ main_content = html.Div(
 )
 
 pagination_controls = html.Div(
-    className="pagination-controls",
+    className="pagination-controls row",
     children=[
         html.Button("Previous",     id="prev_btn"),
         html.Button("Next",         id="next_btn"),
         html.Button("Sort by Risk", id="sort_risk_btn"),
+    ],
+)
+pagination_number = html.Div(
+    className="pagination-number row",
+    children=[
+        html.Div(id="page_numbers")
     ],
 )
 
@@ -296,10 +304,11 @@ app.layout = html.Div(
     children=[
         html.Div([sidebar, main_content], className="row bg-dark"),
         html.Br(),
+        dcc.Store(id="pagination_meta", data=0),
         dcc.Store(id="current_page", data=0),
         dcc.Store(id="sorted_risk",  data=False),
         html.Div(id="risk_table", className="bg-dark"),
-        pagination_controls,
+        html.Div([pagination_controls, pagination_number]),
     ],
 )
 
@@ -365,19 +374,22 @@ def update_table(filtered_data, current_page):
     Input("next_btn", "n_clicks"),
     Input("filtered_data_store", "data"),
     State("current_page", "data"),
+    State("pagination_meta", "data"),
     prevent_initial_call=True,
 )
-def handle_pagination(prev_clicks, next_clicks, filtered_data, current_page):
+def handle_pagination(prev_clicks, next_clicks, filtered_data, current_page, meta):
     trigger = callback_context.triggered[0]["prop_id"].split(".")[0]
 
     if trigger == "filtered_data_store":
         return 0
+
+    max_page = meta
+
     if trigger == "next_btn":
         current_page += 1
     elif trigger == "prev_btn" and current_page > 0:
         current_page -= 1
 
-    max_page = (len(filtered_data) - 1) // PAGE_SIZE
     return min(current_page, max_page)
 
 
@@ -390,6 +402,22 @@ def handle_pagination(prev_clicks, next_clicks, filtered_data, current_page):
 def toggle_sort(sort_clicks, current_state):
     return not current_state
 
+@app.callback(
+    Output("pagination_meta", "data"),
+    Input("filtered_data_store", "data")
+)
+def compute_pagination_meta(filtered_data):
+    max_page = (len(filtered_data) - 1) // PAGE_SIZE if filtered_data else 0
+    return max_page
+    
+
+@app.callback(
+    Output("page_numbers", "children"),
+    Input("current_page", "data"),
+    Input("pagination_meta", "data"),
+)
+def update_page_numbers(current_page, max_page):
+    return make_page_number(current_page,max_page)
 
 # =============================================================================
 # ENTRY POINT
