@@ -29,7 +29,6 @@ Code review and performance:
 In the filtering there are more computations than needed. For every singular filter change all others are being re-applied to the base and then the entire thing is stored. It might have been better to store the filters and apply those on update to the df directly. Pagination should also be done server side as the user doesn’t need to receive the entire filtered data.
 
 User guide:
-![alt text](images/filters_web.png)
 The filters are drop down menus or sliders so they are intuitive to understand. Many of them can be selected at once so that you can get a deeper understanding.
 ![alt text](images/piechart_web.png)
 The pie chart also has a drop down menu which allows you to group the data on top of the filters.
