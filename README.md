@@ -44,3 +44,5 @@ It would have been cool to click on the pie chart and filter the data on the ris
 Appendix
 Use of AI:
 YES
+
+It's ctrl+shift + V to preview a md file in VSC oops...
