@@ -1,7 +1,7 @@
 # Flood-Data-Dashboard-using-plotly-dash
 
-[![Dashboard showcase using Plotly Dash](https://img.youtube.com/vi/59QHSXzSsBY/hqdefault.jpg)](http://www.youtube.com/watch?v=59QHSXzSsBY "Dashboard showcase using Plotly Dash")  
-https://youtu.be/59QHSXzSsBY  
+[![Demo Dashboard showcase made with Plotly and Dash](https://thumbs.video-to-markdown.com/9efb172f.jpg)](https://youtu.be/ozsbJdAmBCU)
+https://youtu.be/ozsbJdAmBCU
 Dutch Exchange submission
 Flood Dashboard Report  
 Wire frames:
